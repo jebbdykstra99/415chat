@@ -1,0 +1,270 @@
+{
+  "siteId": "415chat",
+  "name": "415chat",
+  "tagline": "San Francisco, talking.",
+  "composePlaceholder": "What's happening in the 415?",
+  "emptyState": "This room is empty. Sign in with email to post the first take about the 415. Guest can browse only.",
+  "theme": {
+    "bg": "#e8eef2",
+    "surface": "#f4f7fa",
+    "nav-bg": "#0b1c2c",
+    "nav-text": "#9bb0c0",
+    "nav-hover": "#d5e2ea",
+    "nav-active": "#f4f8fb",
+    "text": "#12202c",
+    "text-muted": "#4a5d6c",
+    "text-light": "#6d8292",
+    "accent": "#c0362c",
+    "accent-dark": "#9a2a23",
+    "teal": "#1b6b73",
+    "silver": "#b8c5cf",
+    "border": "#c9d5de",
+    "avatarColors": [
+      "#0b1c2c",
+      "#1b6b73",
+      "#c0362c",
+      "#2a4a62",
+      "#8a3b32",
+      "#345c6e"
+    ]
+  },
+  "trends": [
+    {
+      "tag": "Fog",
+      "headline": "Karl sitting on Twin Peaks again",
+      "snippet": "Visibility at the lookout is a rumor until 2pm. Jacket weather on the west side.",
+      "meta": "Trending in 415"
+    },
+    {
+      "tag": "Transit",
+      "headline": "BART delays through Embarcadero",
+      "snippet": "Yellow line crawling. People are walking Market instead. Bring a book.",
+      "meta": "Live in the city"
+    },
+    {
+      "tag": "Food",
+      "headline": "Mission burrito discourse, round 4,000",
+      "snippet": "Foil vs no foil. Super vs regular. Everyone is wrong except your spot.",
+      "meta": "Neighborhood chat"
+    },
+    {
+      "tag": "Sports",
+      "headline": "Giants weekend series at the yard",
+      "snippet": "Oracle Park wind is doing that thing. Extra innings energy on the Muni ride home.",
+      "meta": "The City"
+    },
+    {
+      "tag": "415 vs 628",
+      "headline": "Still telling people it is 415",
+      "snippet": "Overlay numbers keep showing up. The area code is a personality now.",
+      "meta": "Local lore"
+    },
+    {
+      "tag": "Bridge",
+      "headline": "Golden Gate in full International Orange",
+      "snippet": "Clear enough to see the towers from Crissy. Rare. Screenshot it.",
+      "meta": "Postcard day"
+    }
+  ],
+  "places": [
+    {
+      "tag": "Neighborhood",
+      "title": "The Mission",
+      "snippet": "Murals, late tables, and the eternal burrito argument."
+    },
+    {
+      "tag": "Neighborhood",
+      "title": "Outer Sunset",
+      "snippet": "Fog, tar pits of parking, and the ocean at the end of every street."
+    },
+    {
+      "tag": "Neighborhood",
+      "title": "North Beach",
+      "snippet": "Caffe, neon, and hills that punish the calves."
+    },
+    {
+      "tag": "Neighborhood",
+      "title": "SOMA",
+      "snippet": "Caltrain sighs and after-work crowds on 2nd Street."
+    },
+    {
+      "tag": "Neighborhood",
+      "title": "Richmond",
+      "snippet": "Clement Street groceries and quiet fog that never clocks out."
+    },
+    {
+      "tag": "Neighborhood",
+      "title": "Dogpatch",
+      "snippet": "Warehouses, the bay, and a farmer’s market that actually feels like a market."
+    }
+  ],
+  "topics": [
+    {
+      "tag": "Transit",
+      "title": "Muni & BART",
+      "snippet": "Delays, owl buses, and the person eating a burrito on a packed car."
+    },
+    {
+      "tag": "Weather",
+      "title": "Microclimates",
+      "snippet": "Hoodie in the Sunset, short sleeves in the Mission. Same hour."
+    },
+    {
+      "tag": "Sports",
+      "title": "Giants / Warriors / Sharks",
+      "snippet": "Oracle, Chase, and the ferry after a night game."
+    },
+    {
+      "tag": "Food",
+      "title": "Burritos & sourdough",
+      "snippet": "Mission super vs Ferry Building loaf. Both are religion."
+    },
+    {
+      "tag": "Housing",
+      "title": "Rent & rooms",
+      "snippet": "Dummy talk only — no listings, no personal data."
+    },
+    {
+      "tag": "Culture",
+      "title": "Fillmore & the parks",
+      "snippet": "Jazz, Dolores blankets, and the band that always overruns."
+    }
+  ],
+  "seedNote": "sample — not mixed into the live feed",
+  "seed": [
+    {
+      "id": "p1",
+      "name": "Karl the Fog",
+      "handle": "karlthefog",
+      "text": "Parked on Twin Peaks until further notice. If you can see the bridge, take a picture. You will not get this again this week.",
+      "hours": 2,
+      "likes": 128,
+      "replies": 19,
+      "followed": true
+    },
+    {
+      "id": "p2",
+      "name": "BART Watcher",
+      "handle": "bartwatcher",
+      "text": "Embarcadero is a suggestion right now. Yellow line 18 minutes. I am walking Market. Again.",
+      "hours": 3,
+      "likes": 86,
+      "replies": 31,
+      "followed": true
+    },
+    {
+      "id": "p3",
+      "name": "Mission Foil",
+      "handle": "missionfoil",
+      "text": "Hot take nobody asked for: if it is not wrapped like a silver brick, it is a wrap, not a burrito. La Taqueria stans, I see you. We can still be friends.",
+      "hours": 5,
+      "likes": 241,
+      "replies": 64,
+      "followed": false
+    },
+    {
+      "id": "p4",
+      "name": "Yardbird",
+      "handle": "oraclewind",
+      "text": "Giants night, wind off the bay, garlic fries in the upper deck. This is the whole personality.",
+      "hours": 8,
+      "likes": 97,
+      "replies": 12,
+      "followed": true
+    },
+    {
+      "id": "p5",
+      "name": "Bridge Cat",
+      "handle": "ggspan",
+      "text": "International Orange hitting different this morning. Crissy Field is doing the postcard thing. 415 out.",
+      "hours": 11,
+      "likes": 156,
+      "replies": 8,
+      "followed": false
+    },
+    {
+      "id": "p6",
+      "name": "Six Two Eight",
+      "handle": "not415enough",
+      "text": "New number came in as 628. I still tell people it is 415. The overlay is real and I refuse to emotionally accept it.",
+      "hours": 14,
+      "likes": 312,
+      "replies": 47,
+      "followed": true
+    },
+    {
+      "id": "p7",
+      "name": "Dolores Blanket",
+      "handle": "parkhip",
+      "text": "Dolores is a quilt of strangers by 1pm. Someone is always flying a kite into someone else’s charcuterie.",
+      "hours": 18,
+      "likes": 73,
+      "replies": 9,
+      "followed": false
+    },
+    {
+      "id": "p8",
+      "name": "Outerlands Kid",
+      "handle": "outersunset",
+      "text": "Judah is a wind tunnel, the ocean is loud, and parking is a folk tale. Would not live anywhere else.",
+      "hours": 22,
+      "likes": 118,
+      "replies": 16,
+      "followed": true
+    }
+  ],
+  "notifs": [
+    {
+      "id": "n1",
+      "text": "@karlthefog liked your take.",
+      "time": "1h",
+      "unread": true
+    },
+    {
+      "id": "n2",
+      "text": "@bartwatcher mentioned you. Dummy mention.",
+      "time": "3h",
+      "unread": true
+    },
+    {
+      "id": "n3",
+      "text": "@missionfoil started following you. Dummy follow.",
+      "time": "Yesterday",
+      "unread": true
+    }
+  ],
+  "threads": [
+    {
+      "id": "t1",
+      "name": "Karl the Fog",
+      "handle": "karlthefog",
+      "preview": "Parked on Twin Peaks until further notice. If you can see the bridge, ta",
+      "messages": [
+        {
+          "me": false,
+          "text": "Parked on Twin Peaks until further notice. If you can see the bridge, take a picture. You will not get this again this week."
+        },
+        {
+          "me": true,
+          "text": "Dummy reply. Sample inbox only."
+        }
+      ]
+    },
+    {
+      "id": "t2",
+      "name": "BART Watcher",
+      "handle": "bartwatcher",
+      "preview": "Embarcadero is a suggestion right now. Yellow line 18 minutes. I am walk",
+      "messages": [
+        {
+          "me": false,
+          "text": "Embarcadero is a suggestion right now. Yellow line 18 minutes. I am walking Market. Again."
+        },
+        {
+          "me": true,
+          "text": "Dummy reply. Sample inbox only."
+        }
+      ]
+    }
+  ]
+}
