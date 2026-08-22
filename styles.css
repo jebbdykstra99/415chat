@@ -15,8 +15,8 @@
   --teal:          #1b6b73;
   --silver:          #b8c5cf;
   --border:          #c9d5de;
-  --nav-w:          240px;
-  --right-w:          280px;
+  --nav-w:          275px;
+  --right-w:          330px;
   --ui:          Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
   --display:          "Barlow Condensed", Inter, sans-serif;
 }
