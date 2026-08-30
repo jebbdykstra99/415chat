@@ -370,6 +370,42 @@
       input.placeholder = site.composePlaceholder;
       input.setAttribute('data-ph', site.composePlaceholder);
     }
+    applyRailChrome();
+  }
+
+  function railCfg() {
+    return (site && site.rail) || {};
+  }
+
+  function railUsesNws() {
+    var cfg = railCfg();
+    return cfg.kind === 'nws-forecast' || !!(cfg.forecastUrl || (cfg.lat != null && cfg.lon != null));
+  }
+
+  function applyRailChrome() {
+    var cfg = railCfg();
+    var kicker = cfg.kicker || (railUsesNws() ? 'In the room' : '');
+    var title = cfg.title || (railUsesNws() ? 'Room Brief' : '');
+    var footer = cfg.footer || (railUsesNws() ? 'Official NWS forecast. Not a news ingest.' : '');
+    var rk = document.querySelector('.right-panel-kicker');
+    var rt = document.querySelector('.right-panel-title');
+    var rf = document.querySelector('.right-panel-footer p');
+    var nk = document.querySelector('#page-news .page-kicker');
+    var nh = document.querySelector('#page-news h1');
+    var tab = document.getElementById('right-panel-tab');
+    if (kicker) {
+      if (rk) rk.textContent = kicker;
+      if (nk) nk.textContent = kicker;
+    }
+    if (title) {
+      if (rt) rt.textContent = title;
+      if (nh) nh.textContent = title;
+    }
+    if (footer && rf) rf.textContent = footer;
+    if (tab && title) {
+      tab.title = 'Toggle ' + title.toLowerCase();
+      tab.setAttribute('aria-label', 'Toggle ' + title.toLowerCase());
+    }
   }
 
   function hideDummyChrome() {
@@ -685,22 +721,234 @@
     highlightDeepPost();
   }
 
-  function renderTrends() {
-    const card = function (t) {
-      const href = t.url || '#explore';
-      const extra = t.url ? ' target="_blank" rel="noopener noreferrer"' : '';
-      return '<a class="news-item" href="' + href + '"' + extra + '>' +
-        '<div class="news-item-tag">' + escapeHtml(t.tag) + '</div>' +
-        '<div class="news-item-headline">' + escapeHtml(t.headline) + '</div>' +
-        '<div class="news-item-snippet">' + escapeHtml(t.snippet) + '</div>' +
-        '<div class="news-item-meta">' + escapeHtml(t.meta) + '</div>' +
-      '</a>';
+  var RAIL_MAX = 3;
+
+  function nwsHeaders() {
+    var cfg = railCfg();
+    var ua = cfg.userAgent || ((site && site.name) || SITE_ID || 'subx') + '/rail (jebb@subx.it)';
+    return {
+      'Accept': 'application/geo+json',
+      'User-Agent': ua
     };
-    const rail = document.getElementById('news-feed');
-    const page = document.getElementById('news-page-list');
-    const html = TRENDS.map(card).join('');
+  }
+
+  function nwsTagFor(shortForecast) {
+    var s = String(shortForecast || '').toLowerCase();
+    if (/\bfog\b/.test(s)) return 'Fog';
+    return 'NWS';
+  }
+
+  function renderTrendCard(t) {
+    const href = t.url || '#explore';
+    const extra = t.url ? ' target="_blank" rel="noopener noreferrer"' : '';
+    return '<a class="news-item" href="' + escapeHtml(href) + '"' + extra + '>' +
+      '<div class="news-item-tag">' + escapeHtml(t.tag) + '</div>' +
+      '<div class="news-item-headline">' + escapeHtml(t.headline) + '</div>' +
+      '<div class="news-item-snippet">' + escapeHtml(t.snippet) + '</div>' +
+      '<div class="news-item-meta">' + escapeHtml(t.meta) + '</div>' +
+    '</a>';
+  }
+
+  function porchCardHtml() {
+    var porch = railCfg().porch;
+    if (!porch || !porch.options || !porch.options.length) return '';
+    var prompt = porch.prompt || 'Your call?';
+    var btns = porch.options.map(function (opt) {
+      return '<button type="button" class="porch-btn" data-porch="' + escapeHtml(opt) + '">' + escapeHtml(opt) + '</button>';
+    }).join('');
+    return '<div class="news-item news-item-porch">' +
+      '<div class="news-item-tag">Porch</div>' +
+      '<div class="news-item-headline">' + escapeHtml(prompt) + '</div>' +
+      '<div class="news-item-snippet">Pick a side. Posts to this room.</div>' +
+      '<div class="porch-btns">' + btns + '</div>' +
+      '<div class="news-item-meta">This room</div>' +
+    '</div>';
+  }
+
+  function ensureRailCss() {
+    if (document.getElementById('rail-porch-css')) return;
+    var st = document.createElement('style');
+    st.id = 'rail-porch-css';
+    st.textContent =
+      '.news-item{display:block;padding:1rem 1.4rem;border-bottom:1px solid rgba(255,255,255,0.06);}' +
+      'a.news-item{text-decoration:none;cursor:pointer;}' +
+      '.porch-btns{display:flex;gap:0.45rem;margin:0.45rem 0 0.2rem;flex-wrap:wrap;}' +
+      '.porch-btn{font:inherit;font-size:0.78rem;font-weight:600;padding:0.35rem 0.8rem;border-radius:999px;' +
+        'border:1px solid rgba(255,255,255,0.22);background:rgba(255,255,255,0.08);color:#f0f4f7;cursor:pointer;}' +
+      '.porch-btn:hover{background:rgba(255,255,255,0.16);}' +
+      '.news-page-list .news-item{background:var(--surface,#f4f7fa);border:1px solid var(--border,#c9d5de);border-radius:10px;padding:1.05rem 1.15rem;}' +
+      '.news-page-list .porch-btn{border-color:var(--border,#c9d5de);background:#fff;color:var(--text,#12202c);}' +
+      '.news-page-list .porch-btn:hover{border-color:var(--accent,#c0362c);color:var(--accent,#c0362c);}';
+    document.head.appendChild(st);
+  }
+
+  function paintRail(items) {
+    ensureRailCss();
+    var html = (items || []).map(renderTrendCard).join('') + porchCardHtml();
+    var rail = document.getElementById('news-feed');
+    var page = document.getElementById('news-page-list');
     if (rail) rail.innerHTML = html;
     if (page) page.innerHTML = html;
+  }
+
+  function nwsCardFromPeriod(period, href, meta) {
+    var name = period.name || 'Forecast';
+    var short = period.shortForecast || '';
+    var temp = (period.temperature != null)
+      ? (period.temperature + '°' + (period.temperatureUnit || 'F'))
+      : '';
+    var snippet = short + (temp ? ' · ' + temp : '');
+    return {
+      tag: nwsTagFor(short),
+      headline: name,
+      snippet: snippet,
+      meta: meta,
+      url: href
+    };
+  }
+
+  function nwsCardFromAlert(feature, href, meta) {
+    var p = (feature && feature.properties) || {};
+    var headline = p.headline || p.event || '';
+    if (!headline) return null;
+    var desc = String(p.description || p.instruction || '').replace(/\s+/g, ' ').trim();
+    return {
+      tag: 'Alert',
+      headline: headline,
+      snippet: desc ? desc.slice(0, 160) : (p.event || 'Active NWS alert'),
+      meta: meta,
+      url: p.web || href
+    };
+  }
+
+  function resolveForecastUrl(cfg, headers) {
+    if (cfg.forecastUrl) return Promise.resolve(cfg.forecastUrl);
+    if (cfg.lat == null || cfg.lon == null) return Promise.reject(new Error('no nws point'));
+    var points = 'https://api.weather.gov/points/' + cfg.lat + ',' + cfg.lon;
+    return fetch(points, { headers: headers }).then(function (res) {
+      if (!res.ok) throw new Error('nws points ' + res.status);
+      return res.json();
+    }).then(function (data) {
+      var url = data && data.properties && data.properties.forecast;
+      if (!url) throw new Error('nws points missing forecast');
+      return url;
+    });
+  }
+
+  function fetchNwsCards() {
+    var cfg = railCfg();
+    var headers = nwsHeaders();
+    var meta = cfg.meta || 'Live';
+    var pageHref = cfg.forecastPage || cfg.forecastUrl || 'https://www.weather.gov/';
+    return resolveForecastUrl(cfg, headers).then(function (forecastUrl) {
+      if (!cfg.forecastPage && forecastUrl) pageHref = forecastUrl;
+      var forecastJob = fetch(forecastUrl, { headers: headers }).then(function (res) {
+        if (!res.ok) throw new Error('nws forecast ' + res.status);
+        return res.json();
+      });
+      var alertsUrl = cfg.alertsUrl;
+      if (!alertsUrl && cfg.zone) {
+        alertsUrl = 'https://api.weather.gov/alerts/active?zone=' + encodeURIComponent(cfg.zone);
+      }
+      var alertsJob = alertsUrl
+        ? fetch(alertsUrl, { headers: headers }).then(function (res) {
+            return res.ok ? res.json() : { features: [] };
+          }).catch(function () { return { features: [] }; })
+        : Promise.resolve({ features: [] });
+      return Promise.all([forecastJob, alertsJob]);
+    }).then(function (pair) {
+      var forecast = pair[0] || {};
+      var alerts = pair[1] || {};
+      var cards = [];
+      var features = alerts.features || [];
+      for (var i = 0; i < features.length; i++) {
+        var alertCard = nwsCardFromAlert(features[i], pageHref, meta);
+        if (alertCard) cards.push(alertCard);
+      }
+      var periods = (forecast.properties && forecast.properties.periods) || [];
+      for (var p = 0; p < periods.length; p++) {
+        cards.push(nwsCardFromPeriod(periods[p], pageHref, meta));
+      }
+      if (!periods.length) throw new Error('nws forecast empty');
+      return cards;
+    });
+  }
+
+  function fallbackTrendCards() {
+    return (TRENDS || []).slice(0, 1);
+  }
+
+  function railNwsSlots() {
+    var porch = railCfg().porch;
+    var porchOn = !!(porch && porch.options && porch.options.length);
+    var max = parseInt(railCfg().maxCards, 10) || RAIL_MAX;
+    if (max < 1) max = RAIL_MAX;
+    return porchOn ? Math.max(1, max - 1) : max;
+  }
+
+  function renderTrends() {
+    if (!railUsesNws()) {
+      paintRail(TRENDS || []);
+      return;
+    }
+    paintRail([]);
+    fetchNwsCards().then(function (cards) {
+      if (cards && cards.length) paintRail(cards.slice(0, railNwsSlots()));
+      else paintRail(fallbackTrendCards());
+    }).catch(function (err) {
+      console.warn('nws rail', err);
+      paintRail(fallbackTrendCards());
+    });
+  }
+
+  function porchLine(option) {
+    return String(option || '').trim().replace(/\.+$/, '') + '.';
+  }
+
+  function fillCompose(text) {
+    var input = document.getElementById('thoughts-compose-input');
+    if (!input) return;
+    input.value = text;
+    input.dispatchEvent(new Event('input'));
+    try { input.focus(); } catch (e) {}
+  }
+
+  function addRoomTextPost(text) {
+    var live = fbAuth && fbAuth.currentUser;
+    var disp = (currentUser && currentUser.name) || live.displayName || (live.email || 'member').split('@')[0] || 'Member';
+    var handle = (currentUser && currentUser.handle) || String(disp).toLowerCase().replace(/[^a-z0-9]/g, '').slice(0, 15) || 'member';
+    return fbDb.collection('posts').add({
+      siteId: SITE_ID,
+      parentId: null,
+      authorUid: live.uid,
+      authorName: disp,
+      authorHandle: handle,
+      text: String(text || '').slice(0, 280),
+      likes: {},
+      likeCount: 0,
+      replyCount: 0,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+
+  function porchPick(option) {
+    var line = porchLine(option);
+    if (!line || line === '.') return;
+    if (!isLiveUser()) {
+      go('home');
+      fillCompose(line);
+      composeErr('Sign in with email to post. Guest can only browse.');
+      openAuth('login');
+      return;
+    }
+    if (!requireVerified('post')) return;
+    if (!fbDb) { composeErr('Feed is not connected.'); return; }
+    composeErr('');
+    addRoomTextPost(line).then(function () {
+      composeErr('Posted.');
+    }).catch(function (e) {
+      composeErr((e && e.message) ? e.message : 'Could not post.');
+    });
   }
 
   function renderExplore() {
@@ -1302,6 +1550,13 @@
       }
       if (e.target.closest('#auth-signout')) { signOut(); return; }
 
+      const porchBtn = e.target.closest('[data-porch]');
+      if (porchBtn) {
+        e.preventDefault();
+        porchPick(porchBtn.getAttribute('data-porch'));
+        return;
+      }
+
       const pollOpt = e.target.closest('[data-poll-idx]');
       if (pollOpt) {
         votePoll(pollOpt.dataset.postId, parseInt(pollOpt.dataset.pollIdx, 10));
@@ -1563,7 +1818,7 @@
 
   function boot(data) {
     site = data || {};
-    SITE_ID = '415chat';
+    SITE_ID = site.siteId || SITE_ID;
     TRENDS = site.trends || [];
     PLACES = site.places || [];
     TOPICS = site.topics || [];

@@ -5,6 +5,23 @@
   "tagline": "San Francisco, talking.",
   "composePlaceholder": "What's happening in the 415?",
   "emptyState": "This room is empty. Sign in with email to post the first take about the 415. Guest can browse only.",
+  "rail": {
+    "kind": "nws-forecast",
+    "title": "Room Brief",
+    "kicker": "In the 415",
+    "meta": "Live · SF Bay",
+    "footer": "Official NWS forecast for the SF Bay. Not a news ingest.",
+    "lat": 37.7749,
+    "lon": -122.4194,
+    "forecastUrl": "https://api.weather.gov/gridpoints/MTR/85,105/forecast",
+    "forecastPage": "https://forecast.weather.gov/MapClick.php?lat=37.7749&lon=-122.4194",
+    "zone": "CAZ006",
+    "userAgent": "415chat.com/rail (jebb@subx.it)",
+    "porch": {
+      "prompt": "Fog or sun?",
+      "options": ["Fog", "Sun"]
+    }
+  },
   "theme": {
     "bg": "#e8eef2",
     "surface": "#f4f7fa",
