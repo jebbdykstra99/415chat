@@ -377,9 +377,19 @@
     return (site && site.rail) || {};
   }
 
+  function railKind() {
+    return String(railCfg().kind || '');
+  }
+
+  function railUsesCwf() {
+    return railKind() === 'nws-cwf';
+  }
+
   function railUsesNws() {
     var cfg = railCfg();
-    return cfg.kind === 'nws-forecast' || !!(cfg.forecastUrl || (cfg.lat != null && cfg.lon != null));
+    var kind = railKind();
+    if (kind === 'nws-cwf' || kind === 'nws-forecast') return true;
+    return !!(cfg.forecastUrl || (cfg.lat != null && cfg.lon != null));
   }
 
   function applyRailChrome() {
@@ -723,11 +733,11 @@
 
   var RAIL_MAX = 3;
 
-  function nwsHeaders() {
+  function nwsHeaders(accept) {
     var cfg = railCfg();
     var ua = cfg.userAgent || ((site && site.name) || SITE_ID || 'subx') + '/rail (jebb@subx.it)';
     return {
-      'Accept': 'application/geo+json',
+      'Accept': accept || 'application/geo+json',
       'User-Agent': ua
     };
   }
@@ -874,6 +884,119 @@
     });
   }
 
+  function cwfHeadline(name) {
+    return String(name || 'Forecast')
+      .toLowerCase()
+      .replace(/\b[a-z]/g, function (ch) { return ch.toUpperCase(); })
+      .replace(/\bOf\b/g, 'of');
+  }
+
+  function cwfSnippet(body) {
+    var flat = String(body || '').replace(/\s+/g, ' ').trim();
+    if (!flat) return '';
+    var wind = /[^.]*(?:\bwind|\bwinds)[^.]*\.?/i.exec(flat);
+    var seas = /[^.]*(?:\bseas?\b|\bswell\b)[^.]*\.?/i.exec(flat);
+    var bits = [];
+    if (wind) bits.push(wind[0].trim().replace(/\.+$/, '') + '.');
+    if (seas && (!wind || seas.index !== wind.index)) bits.push(seas[0].trim().replace(/\.+$/, '') + '.');
+    if (bits.length) return bits.join(' ');
+    return flat.slice(0, 160);
+  }
+
+  function cwfTag(productText) {
+    return /small craft/i.test(String(productText || '')) ? 'Advisory' : 'Seas';
+  }
+
+  function parseCwfPeriods(productText) {
+    var text = String(productText || '');
+    var cut = text.search(/\n&&(?:\n|$)/);
+    if (cut < 0) cut = text.search(/\n\.VAAIGA\b/);
+    if (cut > 0) text = text.slice(0, cut);
+    var periodRe = /^\.([A-Z][A-Z \-]{1,40})\.{2,}(.*)$/;
+    var lines = text.split(/\n/);
+    var periods = [];
+    var cur = null;
+    for (var i = 0; i < lines.length; i++) {
+      var line = lines[i];
+      var m = line.match(periodRe);
+      if (m) {
+        if (cur) periods.push(cur);
+        cur = { name: m[1].replace(/\s+/g, ' ').trim(), body: m[2] || '' };
+        continue;
+      }
+      if (cur) {
+        if (/^\$\$/.test(line) || /^&&/.test(line)) {
+          periods.push(cur);
+          cur = null;
+          break;
+        }
+        if (line.trim()) cur.body += ' ' + line;
+      }
+    }
+    if (cur) periods.push(cur);
+    return periods.filter(function (p) {
+      return p.name && !/^(SYNOPSIS|VAAIGA|PO|ASO)\b/.test(p.name);
+    });
+  }
+
+  function parseCwfCards(productText, href, meta) {
+    var periods = parseCwfPeriods(productText);
+    var tag = cwfTag(productText);
+    var cards = [];
+    var n = Math.min(2, periods.length);
+    for (var i = 0; i < n; i++) {
+      var snippet = cwfSnippet(periods[i].body);
+      if (!snippet) continue;
+      cards.push({
+        tag: tag,
+        headline: cwfHeadline(periods[i].name),
+        snippet: snippet,
+        meta: meta,
+        url: href
+      });
+    }
+    return cards;
+  }
+
+  function latestCwfProductId(data) {
+    var graph = (data && (data['@graph'] || data.graph)) || [];
+    if (!graph.length && data && (data.id || data['@id'])) graph = [data];
+    graph = graph.slice().sort(function (a, b) {
+      return String((b && b.issuanceTime) || '').localeCompare(String((a && a.issuanceTime) || ''));
+    });
+    var latest = graph[0];
+    if (!latest) return '';
+    if (latest.id) return String(latest.id);
+    if (latest['@id']) return String(latest['@id']).replace(/^.*\//, '');
+    return '';
+  }
+
+  function fetchCwfCards() {
+    var cfg = railCfg();
+    var headers = nwsHeaders('application/ld+json');
+    var loc = cfg.productLocation || 'PPG';
+    var type = cfg.productType || 'CWF';
+    var meta = cfg.meta || 'Live';
+    var pageHref = cfg.forecastPage || 'https://www.weather.gov/ppg/marine';
+    var listUrl = 'https://api.weather.gov/products/types/' + encodeURIComponent(type) +
+      '/locations/' + encodeURIComponent(loc);
+    return fetch(listUrl, { headers: headers }).then(function (res) {
+      if (!res.ok) throw new Error('nws cwf list ' + res.status);
+      return res.json();
+    }).then(function (data) {
+      var id = latestCwfProductId(data);
+      if (!id) throw new Error('nws cwf missing id');
+      return fetch('https://api.weather.gov/products/' + encodeURIComponent(id), { headers: headers });
+    }).then(function (res) {
+      if (!res.ok) throw new Error('nws cwf product ' + res.status);
+      return res.json();
+    }).then(function (prod) {
+      var cards = parseCwfCards(prod && prod.productText, pageHref, meta);
+      if (!cards.length) throw new Error('nws cwf parse empty');
+      return cards;
+    });
+  }
+
   function fallbackTrendCards() {
     return (TRENDS || []).slice(0, 1);
   }
@@ -887,16 +1010,17 @@
   }
 
   function renderTrends() {
-    if (!railUsesNws()) {
+    var liveFetch = railUsesCwf() ? fetchCwfCards : (railUsesNws() ? fetchNwsCards : null);
+    if (!liveFetch) {
       paintRail(TRENDS || []);
       return;
     }
     paintRail([]);
-    fetchNwsCards().then(function (cards) {
+    liveFetch().then(function (cards) {
       if (cards && cards.length) paintRail(cards.slice(0, railNwsSlots()));
       else paintRail(fallbackTrendCards());
     }).catch(function (err) {
-      console.warn('nws rail', err);
+      console.warn(railUsesCwf() ? 'nws cwf rail' : 'nws rail', err);
       paintRail(fallbackTrendCards());
     });
   }
