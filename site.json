@@ -17,6 +17,17 @@
     "forecastPage": "https://forecast.weather.gov/MapClick.php?lat=37.7749&lon=-122.4194",
     "zone": "CAZ006",
     "userAgent": "415chat.com/rail (jebb@subx.it)",
+    "overlay": {
+      "enabled": true,
+      "ms": 7000,
+      "headline": "Live SF Bay forecast",
+      "links": [
+        {
+          "label": "NWS Bay forecast",
+          "url": "https://forecast.weather.gov/MapClick.php?lat=37.7749&lon=-122.4194"
+        }
+      ]
+    },
     "porch": {
       "prompt": "Fog or sun?",
       "options": ["Fog", "Sun"]
