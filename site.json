@@ -30,7 +30,8 @@
     },
     "porch": {
       "prompt": "Fog or sun?",
-      "options": ["Fog", "Sun"]
+      "options": ["Fog", "Sun"],
+      "dwellMs": 9000
     }
   },
   "theme": {
