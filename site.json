@@ -30,7 +30,10 @@
     },
     "porch": {
       "prompt": "Fog or sun?",
-      "options": ["Fog", "Sun"],
+      "options": [
+        "Fog",
+        "Sun"
+      ],
       "dwellMs": 9000
     }
   },
@@ -126,6 +129,16 @@
       "tag": "Neighborhood",
       "title": "Dogpatch",
       "snippet": "Warehouses, the bay, and a farmer’s market that actually feels like a market."
+    },
+    {
+      "tag": "Explore",
+      "title": "Events",
+      "snippet": "What's on in the Bay — when you've got a real date. No invented calendar."
+    },
+    {
+      "tag": "Explore",
+      "title": "Recommendations",
+      "snippet": "Spots, bites, and “go here” from people in the room — opinions, not ads."
     }
   ],
   "topics": [
@@ -158,6 +171,16 @@
       "tag": "Culture",
       "title": "Fillmore & the parks",
       "snippet": "Jazz, Dolores blankets, and the band that always overruns."
+    },
+    {
+      "tag": "Explore",
+      "title": "Oakland · Berkeley · Peninsula",
+      "snippet": "East Bay and south of the City are in the conversation when you are."
+    },
+    {
+      "tag": "Explore",
+      "title": "SF vs East Bay",
+      "snippet": "Friendly argument energy. Fog vs sun, bridge traffic, who has the better taco."
     }
   ],
   "stories": {
