@@ -87,7 +87,31 @@
       "#2a4a62",
       "#8a3b32",
       "#345c6e"
-    ]
+    ],
+    "light": {
+      "bg": "#fffaf3",
+      "surface": "#ffffff",
+      "nav-bg": "#0b1c2c",
+      "nav-text": "#9bb0c0",
+      "nav-hover": "#d5e2ea",
+      "nav-active": "#f4f8fb",
+      "text": "#1a242c",
+      "text-muted": "#4a5d6c",
+      "text-light": "#5f7584",
+      "accent": "#c0362c",
+      "accent-dark": "#9a2a23",
+      "teal": "#1b6b73",
+      "silver": "#c8c2b8",
+      "border": "#eadfce",
+      "avatarColors": [
+        "#0b1c2c",
+        "#1b6b73",
+        "#c0362c",
+        "#2a4a62",
+        "#8a3b32",
+        "#345c6e"
+      ]
+    }
   },
   "trends": [
     {
