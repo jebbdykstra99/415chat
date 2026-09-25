@@ -46,7 +46,24 @@
       "tuesday": "Mostly sunny. High near 70°F. SW 5–12 mph.",
       "page": "https://forecast.weather.gov/MapClick.php?lat=37.7749&lon=-122.4194",
       "note": "Not a news ingest. No invented transit/events."
-    }
+    },
+    "outbound": [
+      {
+        "tag": "Board",
+        "headline": "NWS Bay Area",
+        "url": "https://www.weather.gov/mtr/",
+        "snippet": "Official NWS San Francisco Bay Area forecast office (same MTR source family as Room Brief).",
+        "meta": "Official · board"
+      },
+      {
+        "tag": "Watch",
+        "headline": "SFGovTV Live",
+        "url": "https://sfgovtv.org/sfgovtv-live-events",
+        "snippet": "City of San Francisco official livestream hub (ch1/ch2). Deep-link only — not an in-app player.",
+        "meta": "Legal · outbound"
+      }
+    ],
+    "maxCards": 4
   },
   "theme": {
     "bg": "#e8eef2",
