@@ -356,14 +356,86 @@
   };
 
 
+  var LS_THEME = 'subx-theme';
+
+  function explicitThemePref() {
+    try {
+      var t = localStorage.getItem(LS_THEME);
+      if (t === 'light' || t === 'dark') return t;
+    } catch (e) {}
+    return '';
+  }
+  function currentTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'light' ? 'light' : 'dark';
+  }
+  function themeTokensFor(tokens, mode) {
+    if (!tokens) return null;
+    if (mode === 'light' && tokens.light && typeof tokens.light === 'object') return tokens.light;
+    return tokens;
+  }
   function applyTheme(tokens) {
-    if (!tokens) return;
+    var mode = currentTheme();
+    var pair = themeTokensFor(tokens, mode);
+    if (!pair) return;
     var root = document.documentElement;
-    Object.keys(tokens).forEach(function (k) {
-      if (k === 'avatarColors') return;
-      if (typeof tokens[k] === 'string') root.style.setProperty('--' + k, tokens[k]);
+    Object.keys(pair).forEach(function (k) {
+      if (k === 'avatarColors' || k === 'light') return;
+      if (typeof pair[k] === 'string') root.style.setProperty('--' + k, pair[k]);
     });
-    if (Array.isArray(tokens.avatarColors) && tokens.avatarColors.length) COLORS = tokens.avatarColors.slice();
+    var colors = (Array.isArray(pair.avatarColors) && pair.avatarColors.length)
+      ? pair.avatarColors
+      : (tokens && tokens.avatarColors);
+    if (Array.isArray(colors) && colors.length) COLORS = colors.slice();
+  }
+  function syncThemeToggle() {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    var mode = currentTheme();
+    var next = mode === 'dark' ? 'light' : 'dark';
+    btn.setAttribute('data-mode', mode);
+    btn.setAttribute('aria-label', 'Switch to ' + next + ' mode');
+    btn.setAttribute('title', 'Switch to ' + next + ' mode');
+  }
+  function persistThemePref(mode) {
+    var user = fbAuth && fbAuth.currentUser;
+    if (!user || !fbDb || (mode !== 'light' && mode !== 'dark')) return;
+    fbDb.collection('users').doc(user.uid).set({ themePref: mode }, { merge: true }).catch(function () {});
+  }
+  function setTheme(mode, opts) {
+    if (mode !== 'light' && mode !== 'dark') mode = 'dark';
+    opts = opts || {};
+    document.documentElement.setAttribute('data-theme', mode);
+    if (opts.remember !== false) {
+      try { localStorage.setItem(LS_THEME, mode); } catch (e) {}
+      persistThemePref(mode);
+    }
+    if (site && site.theme) applyTheme(site.theme);
+    syncThemeToggle();
+  }
+  function toggleTheme() {
+    setTheme(currentTheme() === 'dark' ? 'light' : 'dark');
+  }
+  function wireThemeToggle() {
+    var btn = document.getElementById('theme-toggle');
+    if (btn && btn.getAttribute('data-wired') !== '1') {
+      btn.setAttribute('data-wired', '1');
+      btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        toggleTheme();
+      });
+    }
+    syncThemeToggle();
+    if (wireThemeToggle.listening) return;
+    wireThemeToggle.listening = true;
+    try {
+      var mq = window.matchMedia('(prefers-color-scheme: light)');
+      var onOs = function () {
+        if (explicitThemePref()) return;
+        setTheme(mq.matches ? 'light' : 'dark', { remember: false });
+      };
+      if (mq.addEventListener) mq.addEventListener('change', onOs);
+      else if (mq.addListener) mq.addListener(onOs);
+    } catch (e) {}
   }
 
   function applySiteChrome() {
@@ -557,6 +629,7 @@
     hideDummyChrome();
     syncChatChrome();
     syncProfile();
+    persistThemePref(currentTheme());
     listenBlocks(user.uid);
     listenConversations();
     restoreCompose(draft);
@@ -2763,9 +2836,33 @@
     );
   }
 
+  function renderTopNavAccount() {
+    var btn = document.getElementById('top-nav-account');
+    var av = document.getElementById('top-nav-avatar');
+    var text = document.getElementById('top-nav-avatar-text');
+    if (!btn || !av) return;
+    if (isLiveUser() && currentUser && currentUser.live) {
+      av.classList.remove('is-anon');
+      if (text) text.textContent = initials(currentUser.name);
+      av.style.background = colorFor(currentUser.handle);
+      btn.setAttribute('aria-label', 'Account, @' + currentUser.handle);
+    } else if (currentUser && !currentUser.live) {
+      av.classList.remove('is-anon');
+      if (text) text.textContent = initials(currentUser.name || 'G');
+      av.style.background = colorFor(currentUser.handle || 'guest');
+      btn.setAttribute('aria-label', 'Guest account');
+    } else {
+      av.classList.add('is-anon');
+      if (text) text.textContent = '';
+      av.style.background = '';
+      btn.setAttribute('aria-label', 'Sign in');
+    }
+  }
+
   function renderSidebarAuth() {
     const el = document.getElementById('sidebar-auth');
     const av = document.getElementById('thoughts-compose-avatar');
+    renderTopNavAccount();
     if (!el) return;
     if (isLiveUser() && currentUser && currentUser.live) {
       el.innerHTML =
@@ -3431,6 +3528,11 @@
       }
       if (e.target.closest('#auth-signin') || e.target.closest('#profile-signin-prompt-btn')) {
         openAuth('join');
+        return;
+      }
+      if (e.target.closest('#top-nav-account')) {
+        if (isLiveUser() && currentUser && currentUser.live) go('profile');
+        else openAuth('join');
         return;
       }
       if (e.target.closest('#cv-use-email-btn')) {
@@ -4608,6 +4710,7 @@
     PLACES = site.places || [];
     TOPICS = site.topics || [];
     applyTheme(site.theme);
+    syncThemeToggle();
     applySiteChrome();
     ensureJoinAuthLayout();
     ensureDmCss();
@@ -4675,6 +4778,8 @@
     syncHamburgerAria();
     try { if (!sessionStorage.getItem('subx.hit.'+SITE_ID)) { sessionStorage.setItem('subx.hit.'+SITE_ID,'1'); sendPixel(); } } catch (e) {}
   }
+
+  wireThemeToggle();
 
   fetch(SITE_JSON_URL)
     .then(function (res) {
