@@ -216,87 +216,67 @@
     "maxSeconds": 15,
     "maxBytes": 8000000
   },
-  "seedNote": "sample — not mixed into the live feed",
+  "seedNote": "STEWARD_REFRESH Fri 2026-09-25 · NWS MTR · Mon fog fight stays live · no second microclimate fight · timed noon PT follow-up still held",
   "seed": [
     {
       "id": "p1",
-      "name": "Karl the Fog",
-      "handle": "karlthefog",
-      "text": "Parked on Twin Peaks until further notice. If you can see the bridge, take a picture. You will not get this again this week.",
-      "hours": 2,
-      "likes": 128,
-      "replies": 19,
-      "followed": true
+      "name": "Fri Card",
+      "handle": "fricard",
+      "hours": 1,
+      "likes": 48,
+      "replies": 7,
+      "followed": true,
+      "text": "Mostly sunny Friday in the city — NWS MTR has high near 70°F, west wind 6–15 mph (gusts to ~23). https://www.weather.gov/mtr/\nOne line: west side already cooler than that card, or are you matching 70?"
     },
     {
       "id": "p2",
-      "name": "BART Watcher",
-      "handle": "bartwatcher",
-      "text": "Embarcadero is a suggestion right now. Yellow line 18 minutes. I am walking Market. Again.",
-      "hours": 3,
-      "likes": 86,
-      "replies": 31,
-      "followed": true
+      "name": "Weekend Look",
+      "handle": "weekendlook",
+      "hours": 2,
+      "likes": 36,
+      "replies": 5,
+      "followed": true,
+      "text": "Saturday mostly sunny near 68°F; Sunday mostly sunny near 63°F (NWS MTR). https://www.weather.gov/mtr/\nWho’s planning outdoor Saturday vs saving the hoodie for Sunday?"
     },
     {
       "id": "p3",
-      "name": "Mission Foil",
-      "handle": "missionfoil",
-      "text": "Hot take nobody asked for: if it is not wrapped like a silver brick, it is a wrap, not a burrito. La Taqueria stans, I see you. We can still be friends.",
-      "hours": 5,
-      "likes": 241,
-      "replies": 64,
-      "followed": false
+      "name": "Overnight",
+      "handle": "overnight415",
+      "hours": 3,
+      "likes": 29,
+      "replies": 4,
+      "followed": true,
+      "text": "Tonight partly cloudy, low around 60°F; Friday night low ~55°F (NWS MTR). https://www.weather.gov/mtr/\nWindows open or closed on the west side tonight?"
     },
     {
       "id": "p4",
-      "name": "Yardbird",
-      "handle": "oraclewind",
-      "text": "Giants night, wind off the bay, garlic fries in the upper deck. This is the whole personality.",
-      "hours": 8,
-      "likes": 97,
-      "replies": 12,
-      "followed": true
+      "name": "SFGovTV Chip",
+      "handle": "sfgovtvchip",
+      "hours": 4,
+      "likes": 22,
+      "replies": 3,
+      "followed": true,
+      "text": "City meetings and archives live on the official hub — outbound only, we don’t re-stream. https://sfgovtv.org/sfgovtv-live-events\nAnyone watching a Board or commission this week?"
     },
     {
       "id": "p5",
-      "name": "Bridge Cat",
-      "handle": "ggspan",
-      "text": "International Orange hitting different this morning. Crissy Field is doing the postcard thing. 415 out.",
-      "hours": 11,
-      "likes": 156,
-      "replies": 8,
-      "followed": false
+      "name": "NWS Board",
+      "handle": "nwsboard",
+      "hours": 5,
+      "likes": 41,
+      "replies": 6,
+      "followed": true,
+      "text": "Bay Area forecast office home (same source family as the Room Brief rail): https://www.weather.gov/mtr/\nBookmark for the card before you argue the microclimate."
     },
     {
       "id": "p6",
-      "name": "Six Two Eight",
-      "handle": "not415enough",
-      "text": "New number came in as 628. I still tell people it is 415. The overlay is real and I refuse to emotionally accept it.",
-      "hours": 14,
-      "likes": 312,
-      "replies": 47,
-      "followed": true
-    },
-    {
-      "id": "p7",
-      "name": "Dolores Blanket",
-      "handle": "parkhip",
-      "text": "Dolores is a quilt of strangers by 1pm. Someone is always flying a kite into someone else’s charcuterie.",
-      "hours": 18,
-      "likes": 73,
-      "replies": 9,
-      "followed": false
-    },
-    {
-      "id": "p8",
-      "name": "Outerlands Kid",
-      "handle": "outersunset",
-      "text": "Judah is a wind tunnel, the ocean is loud, and parking is a folk tale. Would not live anywhere else.",
-      "hours": 22,
-      "likes": 118,
-      "replies": 16,
-      "followed": true
+      "name": "Civic Seed",
+      "handle": "civicseed",
+      "hours": 6,
+      "likes": 18,
+      "replies": 2,
+      "followed": true,
+      "text": "If you’re tracking City Hall this cycle, start at SFGovTV Live / schedule — official stream hub. https://sfgovtv.org/sfgovtv-live-events\nWhat are you actually watching for, not doomscrolling?"
     }
   ],
   "notifs": [
@@ -322,33 +302,33 @@
   "threads": [
     {
       "id": "t1",
-      "name": "Karl the Fog",
-      "handle": "karlthefog",
-      "preview": "Parked on Twin Peaks until further notice. If you can see the bridge, ta",
+      "name": "Weekend Layer",
+      "handle": "weekendlook",
+      "preview": "Saturday 68 / Sunday 63 on the NWS card",
       "messages": [
         {
           "me": false,
-          "text": "Parked on Twin Peaks until further notice. If you can see the bridge, take a picture. You will not get this again this week."
+          "text": "Saturday 68 / Sunday 63 on the NWS card — are you dressing for the number or for your neighborhood?"
         },
         {
           "me": true,
-          "text": "Dummy reply. Sample inbox only."
+          "text": "West side always shaves a few degrees off the downtown card. Dress for your block."
         }
       ]
     },
     {
       "id": "t2",
-      "name": "BART Watcher",
-      "handle": "bartwatcher",
-      "preview": "Embarcadero is a suggestion right now. Yellow line 18 minutes. I am walk",
+      "name": "Civic Watch",
+      "handle": "civicseed",
+      "preview": "SFGovTV is the official outbound",
       "messages": [
         {
           "me": false,
-          "text": "Embarcadero is a suggestion right now. Yellow line 18 minutes. I am walking Market. Again."
+          "text": "SFGovTV is the official outbound. One serious question: do you ever actually watch a meeting live, or only catch clips later?"
         },
         {
           "me": true,
-          "text": "Dummy reply. Sample inbox only."
+          "text": "Live when it’s my issue; clips when I’m catching up. Hub only — we don’t re-stream."
         }
       ]
     }
