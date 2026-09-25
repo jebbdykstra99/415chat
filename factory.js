@@ -2016,7 +2016,7 @@
     }
     liveFetch().then(function (cards) {
       var extra = outboundCards();
-      var merged = (cards || []).concat(extra);
+      var merged = railKind() === 'nws-forecast' ? (extra || []).concat(cards || []) : (cards || []).concat(extra);
       if (merged.length) commitRail(merged.slice(0, railNwsSlots()));
       else commitRail(fallbackTrendCards());
     }).catch(function (err) {
