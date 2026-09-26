@@ -1,0 +1,111 @@
+{
+  "siteId": "415chat",
+  "domain": "415chat.com",
+  "taxonomyName": "SF Bay",
+  "topics": [
+    {
+      "id": "sf",
+      "label": "San Francisco",
+      "kind": "city",
+      "blurb": "City proper",
+      "followDefault": true,
+      "adminSeed": true,
+      "status": "active",
+      "symbol": "#SF"
+    },
+    {
+      "id": "oakland",
+      "label": "Oakland",
+      "kind": "city",
+      "blurb": "East Bay",
+      "followDefault": false,
+      "adminSeed": true,
+      "status": "active",
+      "symbol": "#OAK"
+    },
+    {
+      "id": "sj",
+      "label": "San Jose",
+      "kind": "city",
+      "blurb": "South Bay",
+      "followDefault": false,
+      "adminSeed": true,
+      "status": "active",
+      "symbol": "#SJ"
+    },
+    {
+      "id": "peninsula",
+      "label": "Peninsula",
+      "kind": "city",
+      "blurb": "SF→SJ corridor",
+      "followDefault": true,
+      "adminSeed": true,
+      "status": "active",
+      "symbol": "#PEN"
+    },
+    {
+      "id": "muni",
+      "label": "Muni",
+      "kind": "agency",
+      "blurb": "SF transit talk",
+      "followDefault": true,
+      "adminSeed": true,
+      "status": "active",
+      "symbol": "#MUNI"
+    },
+    {
+      "id": "bart",
+      "label": "BART",
+      "kind": "agency",
+      "blurb": "Regional rail",
+      "followDefault": true,
+      "adminSeed": true,
+      "status": "active",
+      "symbol": "#BART"
+    },
+    {
+      "id": "housing",
+      "label": "Housing",
+      "kind": "theme",
+      "blurb": "Local housing talk",
+      "followDefault": false,
+      "adminSeed": true,
+      "status": "active"
+    },
+    {
+      "id": "food",
+      "label": "Food & SF eats",
+      "kind": "theme",
+      "blurb": "Neighborhood food",
+      "followDefault": false,
+      "adminSeed": true,
+      "status": "active"
+    },
+    {
+      "id": "tech",
+      "label": "Bay tech",
+      "kind": "theme",
+      "blurb": "Tools not hype",
+      "followDefault": false,
+      "adminSeed": true,
+      "status": "active"
+    },
+    {
+      "id": "fog",
+      "label": "Weather & fog",
+      "kind": "theme",
+      "blurb": "Microclimates",
+      "followDefault": false,
+      "adminSeed": true,
+      "status": "active"
+    }
+  ],
+  "topicCount": 10,
+  "defaultWatchlist": [
+    "sf",
+    "peninsula",
+    "muni",
+    "bart"
+  ],
+  "notes": "adminSeed topics are factory pre-populated. Users may unfollow (remove from their list) or follow more from the full taxonomy. Admins may retire topics (status=retired) or add new ones; user lists stay editable."
+}
