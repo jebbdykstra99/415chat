@@ -443,6 +443,88 @@
     ],
     "notes": "Factory followable topics (StockTwits-style). Users keep/unfollow/add on their watchlist."
   },
+  "nests": [
+    {
+      "slug": "fog",
+      "label": "Fog",
+      "parent": null,
+      "kind": "theme",
+      "blurb": "Microclimates and porch fog fights — talk only; forecasts stay NWS.",
+      "nav": true
+    },
+    {
+      "slug": "eats",
+      "label": "Eats",
+      "parent": null,
+      "kind": "theme",
+      "blurb": "Burritos, Clement, Irving, Ferry Building opinions — not ads.",
+      "nav": true
+    },
+    {
+      "slug": "outdoors",
+      "label": "Outdoors",
+      "parent": null,
+      "kind": "theme",
+      "blurb": "GGP, Lands End, Ocean Beach, Bay trails.",
+      "nav": true
+    },
+    {
+      "slug": "rider-life",
+      "label": "Rider life",
+      "parent": null,
+      "kind": "theme",
+      "blurb": "Delays you've felt — not official Muni or BART.",
+      "nav": true
+    },
+    {
+      "slug": "housing",
+      "label": "Housing",
+      "parent": null,
+      "kind": "theme",
+      "blurb": "Rent and moving talk — not a listings board.",
+      "nav": true
+    },
+    {
+      "slug": "ask-415",
+      "label": "Ask 415",
+      "parent": null,
+      "kind": "theme",
+      "blurb": "Newcomer and practical questions.",
+      "nav": true
+    },
+    {
+      "slug": "nightlife",
+      "label": "Nightlife",
+      "parent": null,
+      "kind": "theme",
+      "blurb": "Bars, venues, late rooms — no invented calendars.",
+      "nav": true
+    },
+    {
+      "slug": "tech-scene",
+      "label": "Tech scene",
+      "parent": null,
+      "kind": "theme",
+      "blurb": "Startup and office-culture talk — not corporate PR.",
+      "nav": true
+    },
+    {
+      "slug": "east-bay",
+      "label": "East Bay",
+      "parent": null,
+      "kind": "theme",
+      "blurb": "Oakland, Berkeley, Peninsula in the conversation.",
+      "nav": true
+    },
+    {
+      "slug": "mission",
+      "label": "Mission",
+      "parent": null,
+      "kind": "place",
+      "blurb": "Mission / Valencia / 24th street life.",
+      "nav": true
+    }
+  ],
   "v": 1,
   "cacheBust": 1
 }
