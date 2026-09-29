@@ -1,5 +1,6 @@
 {
   "siteId": "415chat",
+  "dms": true,
   "redditSr": "415chat",
   "name": "415chat",
   "tagline": "San Francisco, talking.",
