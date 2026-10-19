@@ -1,0 +1,14 @@
+{
+  "factory": "jebbdykstra99/subx-factory",
+  "version": "v1.1.0",
+  "room": "415chat",
+  "siteId": "415chat",
+  "files": {
+    "factory.js": "5db3afa908549bd776b862b44582f192bbeafaa35cf80941b5243015a38ec734",
+    "styles.css": "6cf817aede2dc3f660185cab1bd9ec43c2c94312f565296ebc5e42d973bda6d0"
+  },
+  "keepFiles": [],
+  "exceptions": "see subx-factory EXCEPTIONS.md",
+  "stampedAt": "2026-10-19T14:00:00Z",
+  "masterRef": "subx-factory factory/v1.0.0 @ aaf157f"
+}

@@ -527,5 +527,18 @@
     }
   ],
   "v": 1,
-  "cacheBust": 1
+  "cacheBust": 1,
+  "features": {
+    "following": true,
+    "notifs": true
+  },
+  "skin": {
+    "avatarInitials": "415",
+    "bioDefault": "Talking about the city.",
+    "profileEmpty": "No posts yet. Hit Post when something about the city is on your mind.",
+    "guestHandle": "guest415",
+    "exploreEmpty": "Nothing in the 415 matched that."
+  },
+  "minAge": 18,
+  "redditCrosspost": false
 }
