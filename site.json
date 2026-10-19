@@ -539,5 +539,6 @@
     "guestHandle": "guest415",
     "exploreEmpty": "Nothing in the 415 matched that."
   },
-  "minAge": 18
+  "minAge": 18,
+  "redditCrosspost": false
 }
