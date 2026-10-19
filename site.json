@@ -538,5 +538,6 @@
     "profileEmpty": "No posts yet. Hit Post when something about the city is on your mind.",
     "guestHandle": "guest415",
     "exploreEmpty": "Nothing in the 415 matched that."
-  }
+  },
+  "minAge": 18
 }
