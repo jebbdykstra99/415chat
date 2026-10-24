@@ -26,4 +26,4 @@ Until DNS is pointed, Pages will serve on `https://jebbdykstra99.github.io/415ch
 - Feed-first dummy posts about SF (fog, BART, burritos, Giants, 415 vs 628). Fake handles only.
 - Ranking chrome (For You / Following / Hot / New) is UI only.
 - Sign-in modal closes; auth is stubbed locally. No bakasan Firebase project keys.
-- No AskAI. No cross-post to X or Reddit. We are not X.com.
+- No AskAI. No cross-post to X or Reddit. SubX is not X.com.
