@@ -42,9 +42,9 @@
       "state": "Morning FACT",
       "updatedAt": "2026-09-21T09:36:39Z",
       "source": "NWS MTR 85,105",
-      "today": "Slight chance drizzle then partly sunny. High near 66°F. WSW wind 6–14 mph.",
-      "tonight": "Mostly cloudy. Low around 58°F. SW 5–13 mph.",
-      "tuesday": "Mostly sunny. High near 70°F. SW 5–12 mph.",
+      "today": "Slight chance drizzle then partly sunny. High near 66°F. WSW wind 6 to 14 mph.",
+      "tonight": "Mostly cloudy. Low around 58°F. SW 5 to 13 mph.",
+      "tuesday": "Mostly sunny. High near 70°F. SW 5 to 12 mph.",
       "page": "https://forecast.weather.gov/MapClick.php?lat=37.7749&lon=-122.4194",
       "note": "Not a news ingest. No invented transit/events."
     },
@@ -60,7 +60,7 @@
         "tag": "Watch",
         "headline": "SFGovTV Live",
         "url": "https://sfgovtv.org/sfgovtv-live-events",
-        "snippet": "City of San Francisco official livestream hub (ch1/ch2). Deep-link only — not an in-app player.",
+        "snippet": "City of San Francisco official livestream hub (ch1/ch2). Deep-link only, not an in-app player.",
         "meta": "Legal · outbound"
       }
     ],
@@ -162,12 +162,12 @@
     {
       "tag": "Explore",
       "title": "Events",
-      "snippet": "What's on in the Bay — when you've got a real date. No invented calendar."
+      "snippet": "What's on in the Bay, when you've got a real date. No invented calendar."
     },
     {
       "tag": "Explore",
       "title": "Recommendations",
-      "snippet": "Spots, bites, and “go here” from people in the room — opinions, not ads."
+      "snippet": "Spots, bites, and “go here” from people in the room: opinions, not ads."
     }
   ],
   "topics": [
@@ -194,7 +194,7 @@
     {
       "tag": "Housing",
       "title": "Rent & rooms",
-      "snippet": "Dummy talk only — no listings, no personal data."
+      "snippet": "Dummy talk only, no listings, no personal data."
     },
     {
       "tag": "Culture",
@@ -334,7 +334,7 @@
       "label": "Fog",
       "parent": null,
       "kind": "theme",
-      "blurb": "Microclimates and porch fog fights — talk only; forecasts stay NWS.",
+      "blurb": "Microclimates and porch fog fights, talk only; forecasts stay NWS.",
       "nav": true
     },
     {
@@ -342,7 +342,7 @@
       "label": "Eats",
       "parent": null,
       "kind": "theme",
-      "blurb": "Burritos, Clement, Irving, Ferry Building opinions — not ads.",
+      "blurb": "Burritos, Clement, Irving, Ferry Building opinions: not ads.",
       "nav": true
     },
     {
@@ -358,7 +358,7 @@
       "label": "Rider life",
       "parent": null,
       "kind": "theme",
-      "blurb": "Delays you've felt — not official Muni or BART.",
+      "blurb": "Delays you've felt, not official Muni or BART.",
       "nav": true
     },
     {
@@ -366,7 +366,7 @@
       "label": "Housing",
       "parent": null,
       "kind": "theme",
-      "blurb": "Rent and moving talk — not a listings board.",
+      "blurb": "Rent and moving talk, not a listings board.",
       "nav": true
     },
     {
@@ -382,7 +382,7 @@
       "label": "Nightlife",
       "parent": null,
       "kind": "theme",
-      "blurb": "Bars, venues, late rooms — no invented calendars.",
+      "blurb": "Bars, venues, late rooms: no invented calendars.",
       "nav": true
     },
     {
@@ -390,7 +390,7 @@
       "label": "Tech scene",
       "parent": null,
       "kind": "theme",
-      "blurb": "Startup and office-culture talk — not corporate PR.",
+      "blurb": "Startup and office-culture talk, not corporate PR.",
       "nav": true
     },
     {
