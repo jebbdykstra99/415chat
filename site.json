@@ -424,5 +424,6 @@
     "exploreEmpty": "Nothing in the 415 matched that."
   },
   "minAge": 18,
-  "redditCrosspost": false
+  "redditCrosspost": false,
+  "accountsOpen": true
 }
