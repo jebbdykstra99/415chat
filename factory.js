@@ -6494,30 +6494,12 @@
     maybeShowRailOverlay();
 
     restoreBouncedPath();
-    try {
-      var authTab = null;
-      try { authTab = new URLSearchParams(location.search).get('auth'); } catch (eAuthQ) { authTab = null; }
-      if (!authTab) {
-        try {
-          authTab = sessionStorage.getItem('subx.openAuth');
-          if (authTab) sessionStorage.removeItem('subx.openAuth');
-        } catch (eAuthS) { authTab = null; }
-      }
-      if (authTab) {
-        openAuth(authTab === 'register' ? 'register' : 'join');
-        try {
-          var uAuth = new URL(location.href);
-          if (uAuth.searchParams.has('auth')) {
-            uAuth.searchParams.delete('auth');
-            var qAuth = uAuth.searchParams.toString();
-            history.replaceState(null, '', uAuth.pathname + (qAuth ? '?' + qAuth : '') + uAuth.hash);
-          }
-        } catch (eAuthU) {}
-      }
-    } catch (eAuth) {}
     window.addEventListener('hashchange', applyRoute);
     window.addEventListener('popstate', applyRoute);
-    try { deepPostId = new URLSearchParams(location.search).get('p') || ''; } catch (e) { deepPostId = ''; }
+    try { var sp = new URLSearchParams(location.search); deepPostId = sp.get('p') || ''; var a = sp.get('auth');
+      if (a && !isLiveUser()) { openAuth(a === 'register' ? 'register' : 'join'); sp.delete('auth');
+        var q = sp.toString(); history.replaceState(null, '', location.pathname + (q ? '?' + q : '') + location.hash); }
+    } catch (e) { deepPostId = ''; }
     if (!location.hash || location.hash === '#') {
       history.replaceState(null, '', location.pathname + location.search + '#home');
     }
