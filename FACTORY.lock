@@ -6,7 +6,7 @@
   "files": {
     "factory.js": "e3a8df039c327664679121a12213a0d5018a3fc64fac4722e275e2ea72c1e4ae",
     "factory-rail.js": "6e6a593e2009ed7318e36a1d2987b0e153f918141efcf288b36523bf69adb5ba",
-    "styles.css": "c60abd9f814d848a2d633479ba6f67e8befe04ece10de8134d58deb694743df1"
+    "styles.css": "5128093a6cf35a94294b91d93eb8bff85f03e7502db31a0805a488b1a05cccc3"
   },
   "keepFiles": [
     "takedown.js"
