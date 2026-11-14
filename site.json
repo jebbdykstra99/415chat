@@ -6,6 +6,26 @@
   "tagline": "San Francisco, talking.",
   "composePlaceholder": "What's happening in the 415?",
   "emptyState": "This room is empty. Sign in with email to post the first take about the 415. Guest can browse only.",
+  "featured": {
+    "featuredDays": 3,
+    "maxPinned": 3,
+    "articleMinChars": 600,
+    "label": "Our articles",
+    "handles": [
+      "eastbayglance",
+      "mtrcard",
+      "missionsun",
+      "civiccenter",
+      "sfgovwatch",
+      "porchdesk",
+      "sneakerwatch",
+      "fogdesk",
+      "twinpeaks",
+      "bayshoretide",
+      "oceanbeach",
+      "westsidewind"
+    ]
+  },
   "rail": {
     "kind": "nws-forecast",
     "title": "Room Brief",
