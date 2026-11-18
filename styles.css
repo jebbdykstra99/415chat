@@ -1593,3 +1593,6 @@ body.legal-page {
     width: 100%;
   }
 }
+
+/* On-image license must not wrap mid-token (popechat credit format). */
+#page-thoughts .hx-credit .hx-lic { white-space: nowrap; }
