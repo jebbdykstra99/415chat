@@ -431,7 +431,7 @@
     }
   ],
   "v": 1,
-  "cacheBust": 1,
+  "cacheBust": 2,
   "features": {
     "following": true,
     "notifs": true
@@ -445,5 +445,64 @@
   },
   "minAge": 18,
   "redditCrosspost": false,
-  "accountsOpen": true
+  "accountsOpen": true,
+  "heroImages": {
+    "interval": 7000,
+    "backsplash": "#601b16",
+    "scrim": "linear-gradient(180deg, rgba(192,54,44,.16) 0%, rgba(192,54,44,.08) 28%, rgba(163,46,37,.34) 55%, rgba(96,27,22,.86) 80%, rgba(61,16,13,.96) 100%)",
+    "pending": true,
+    "items": [
+      {
+        "id": "sf01",
+        "pending": true,
+        "src": "/assets/hero/sf01-marshalls-beach-1200.webp",
+        "srcSm": "/assets/hero/sf01-marshalls-beach-600.webp",
+        "fallback": "/assets/hero/sf01-marshalls-beach-1200.jpg",
+        "w": 1200,
+        "h": 800,
+        "focal": "",
+        "alt": "",
+        "credit": "",
+        "license": "",
+        "licenseUrl": "",
+        "sourceUrl": "",
+        "reviewed": "",
+        "modified": ""
+      },
+      {
+        "id": "sf02",
+        "pending": true,
+        "src": "/assets/hero/sf02-the-bridge-fog-1200.webp",
+        "srcSm": "/assets/hero/sf02-the-bridge-fog-600.webp",
+        "fallback": "/assets/hero/sf02-the-bridge-fog-1200.jpg",
+        "w": 1200,
+        "h": 800,
+        "focal": "",
+        "alt": "",
+        "credit": "",
+        "license": "",
+        "licenseUrl": "",
+        "sourceUrl": "",
+        "reviewed": "",
+        "modified": ""
+      },
+      {
+        "id": "sf03",
+        "pending": true,
+        "src": "/assets/hero/sf03-painted-ladies-1200.webp",
+        "srcSm": "/assets/hero/sf03-painted-ladies-600.webp",
+        "fallback": "/assets/hero/sf03-painted-ladies-1200.jpg",
+        "w": 1200,
+        "h": 800,
+        "focal": "",
+        "alt": "",
+        "credit": "",
+        "license": "",
+        "licenseUrl": "",
+        "sourceUrl": "",
+        "reviewed": "",
+        "modified": ""
+      }
+    ]
+  }
 }

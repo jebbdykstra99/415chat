@@ -20,8 +20,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=15">
-  <link rel="preload" href="site.json?v=16" as="fetch" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css?v=16">
+  <link rel="preload" href="site.json?v=17" as="fetch" crossorigin="anonymous">
 </head>
 <body>
 <div class="preview-banner" role="status">Beta: early and a bit unfinished. Not a news desk.</div>
@@ -133,6 +133,7 @@
 <main class="main">
 
   <section class="page active" id="page-thoughts">
+    <figure class="hx hx-room hx-reserve" aria-hidden="true"></figure>
     <div class="thoughts-tabs" role="tablist">
       <button class="thoughts-tab active" data-thoughts-tab="foryou" role="tab">For You</button>
       <button class="thoughts-tab" data-thoughts-tab="following" role="tab">Following <span class="tab-soon">Soon</span></button>
@@ -367,7 +368,8 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
   <script src="factory-rail.js?v=38"></script>
-  <script src="factory.js?v=47" data-site="site.json?v=16"></script>
+  <script src="factory.js?v=47" data-site="site.json?v=17"></script>
+  <script src="factory-hero.js?v=1"></script>
   <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@1/index.js"></script>
 <footer class="legal-footer" role="contentinfo" aria-label="Legal">
   <a href="/terms.html">Terms</a> · <a href="/privacy.html">Privacy</a> ·
