@@ -1574,6 +1574,7 @@ body.legal-page {
   position: relative;
   min-width: 0;
   z-index: 0;
+  background-color: #601b16; /* Golden Gate red; no-JS and loading fallback, so the slot never flashes empty */
   background: #601b16;
 }
 #page-thoughts > .hx-room > .hx-scrim {
@@ -1591,6 +1592,20 @@ body.legal-page {
     border-radius: 0;
     border-width: 0 0 1px;
     width: 100%;
+  }
+  /* Short top-down dark wash (~40% black over the top 25%) so the fixed
+     hamburger and logo tile keep 3:1 contrast over bright sky in every photo. */
+  #page-thoughts > .hx-reserve::before,
+  #page-thoughts > .hx.hx-room::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 25%;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.40), rgba(0,0,0,0));
   }
 }
 
