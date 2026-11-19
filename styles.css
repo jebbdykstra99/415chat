@@ -1556,3 +1556,58 @@ body.legal-page {
 .news-page-list .our-articles li { border-top-color: var(--border); }
 .news-page-list .our-articles a { color: var(--text); }
 .news-page-list .our-articles-meta { color: var(--text-muted); }
+
+/* Rotating hero reserve (18 November 2026). Space is reserved before factory-hero.js
+   runs so the feed does not shift (PR #75 390 follow-up). Golden Gate red backsplash
+   (#601b16, from International Orange #C0362C) shows until cleared photos load. */
+#page-thoughts > .hx-reserve,
+#page-thoughts > .hx.hx-room {
+  display: block;
+  aspect-ratio: 3 / 1;
+  max-height: 232px;
+  width: auto;
+  margin: 12px 16px 14px;
+  border-radius: 16px;
+  border: 1px solid var(--border, #c9d5de);
+  isolation: isolate;
+  overflow: hidden;
+  position: relative;
+  min-width: 0;
+  z-index: 0;
+  background-color: #601b16; /* Golden Gate red; no-JS and loading fallback, so the slot never flashes empty */
+  background: #601b16;
+}
+#page-thoughts > .hx-room > .hx-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+@media (max-width: 999px) {
+  #page-thoughts > .hx-reserve,
+  #page-thoughts > .hx.hx-room {
+    aspect-ratio: 16 / 9;
+    max-height: none;
+    margin: 0 0 12px;
+    border-radius: 0;
+    border-width: 0 0 1px;
+    width: 100%;
+  }
+  /* Short top-down dark wash (~40% black over the top 25%) so the fixed
+     hamburger and logo tile keep 3:1 contrast over bright sky in every photo. */
+  #page-thoughts > .hx-reserve::before,
+  #page-thoughts > .hx.hx-room::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    height: 25%;
+    z-index: 2;
+    pointer-events: none;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.40), rgba(0,0,0,0));
+  }
+}
+
+/* On-image license must not wrap mid-token (popechat credit format). */
+#page-thoughts .hx-credit .hx-lic { white-space: nowrap; }
